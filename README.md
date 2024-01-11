@@ -1,4 +1,4 @@
-# CBZ Manga Order
+# CBZ-Page-Reverser
 
 Script to reverse CBZ page order.
 
