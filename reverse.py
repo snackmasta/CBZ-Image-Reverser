@@ -5,8 +5,10 @@ import zipfile
 import tempfile
 import shutil
 
+from PIL import Image
+
 def reverse_file_order(directory):
-    files = os.listdir(directory)
+    files = [f for f in os.listdir(directory) if Image.open(os.path.join(directory, f)).size[0] <= Image.open(os.path.join(directory, f)).size[1]]
     for i in range(0, len(files), 2):
         if i + 1 < len(files):
             temp = os.path.join(directory, str(uuid.uuid4()))
