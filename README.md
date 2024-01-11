@@ -1,6 +1,6 @@
 # CBZ Manga Order
 
-Script to reverse CBZ manga page order.
+Script to reverse CBZ page order.
 
 ## Installation
 
