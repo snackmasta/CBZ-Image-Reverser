@@ -7,16 +7,17 @@ import shutil
 
 def reverse_file_order(directory):
     files = os.listdir(directory)
-    for i in range(len(files) // 2):
-        temp = os.path.join(directory, str(uuid.uuid4()))
-        file1 = os.path.join(directory, files[i])
-        file2 = os.path.join(directory, files[-i-1])
-        try:
-            os.rename(file1, temp)
-            os.rename(file2, file1)
-            os.rename(temp, file2)
-        except Exception as e:
-            print(f"Error swapping files {files[i]} and {files[-i-1]}: {e}")
+    for i in range(0, len(files), 2):
+        if i + 1 < len(files):
+            temp = os.path.join(directory, str(uuid.uuid4()))
+            file1 = os.path.join(directory, files[i])
+            file2 = os.path.join(directory, files[i+1])
+            try:
+                os.rename(file1, temp)
+                os.rename(file2, file1)
+                os.rename(temp, file2)
+            except Exception as e:
+                print(f"Error swapping files {files[i]} and {files[i+1]}: {e}")
 
 def process_cbz_file(cbz_file):
     with tempfile.TemporaryDirectory() as temp_dir:
