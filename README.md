@@ -11,6 +11,6 @@ To use this project, follow these steps:
 
 ## Usage
 
-1. Run the application: `python reverse.py <file.cbz>`
+1. Run the application: `python swap.py <file.cbz>`
 
 
