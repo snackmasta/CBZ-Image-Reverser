@@ -7,7 +7,7 @@ import shutil
 
 from PIL import Image
 
-def reverse_file_order(directory):
+def swap_page_pair(directory):
     # Get a list of files in the directory with width less than or equal to height
     files = [f for f in os.listdir(directory) if Image.open(os.path.join(directory, f)).size[0] <= Image.open(os.path.join(directory, f)).size[1]]
     
@@ -31,7 +31,7 @@ def process_cbz_file(cbz_file):
             zip_ref.extractall(temp_dir)
         
         # Reverse the order of files in the temporary directory
-        reverse_file_order(temp_dir)
+        swap_page_pair(temp_dir)
         
         with zipfile.ZipFile(cbz_file, 'w') as zipf:
             for root, dirs, files in os.walk(temp_dir):

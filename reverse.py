@@ -12,12 +12,6 @@ def process_cbz_file(cbz_file):
         with zipfile.ZipFile(cbz_file, 'r') as zip_ref:
             zip_ref.extractall(temp_dir)
         
-        # # Print the list of files in the temporary directory
-        # print("Files in temporary directory:")
-        # for root, dirs, files in os.walk(temp_dir):
-        #     for file in files:
-        #         print(file)
-        
         # Reverse the order of files in the temporary directory
         reverse_file_order(temp_dir)
         
