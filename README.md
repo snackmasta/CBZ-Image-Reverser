@@ -13,6 +13,6 @@ To use this project, follow these steps:
 
 1. Run the application: `python swap.py <file.cbz>`
 
-Option
+## Option
 - --reverse: Reverse the order of page across entire book.
 - --swap: Swap the order of page in pairs.
