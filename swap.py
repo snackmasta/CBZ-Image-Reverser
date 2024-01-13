@@ -4,16 +4,31 @@ import uuid
 import zipfile
 import tempfile
 import shutil
+import argparse
 
 from PIL import Image
 
-def process_cbz_file(cbz_file):
+# Create the parser
+parser = argparse.ArgumentParser(description='Process a CBZ file.')
+parser.add_argument('cbz_file', type=str, help='The CBZ file to process')
+parser.add_argument('--reverse', action='store_true', help='Reverse the order of files')
+parser.add_argument('--swap', action='store_true', help='Swap the order of files in pairs')
+
+# Parse the arguments
+args = parser.parse_args()
+
+def process_cbz_file(cbz_file, args):
     with tempfile.TemporaryDirectory() as temp_dir:
         with zipfile.ZipFile(cbz_file, 'r') as zip_ref:
             zip_ref.extractall(temp_dir)
         
-        # Reverse the order of files in the temporary directory
-        reverse_file_order(temp_dir)
+        # Process the CBZ file
+        if args.reverse:
+            reverse_file_order(temp_dir)
+        elif args.swap:
+            swap_page_pair(temp_dir)
+        else:
+            print("Please specify either --reverse or --swap")
         
         with zipfile.ZipFile(cbz_file, 'w') as zipf:
             for root, dirs, files in os.walk(temp_dir):
@@ -57,10 +72,9 @@ def reverse_file_order(directory):
             except Exception as e:
                 print(f"Error swapping files {files[i]} and {files[i+1]}: {e}")
 
-
 # Check if the script is called with the correct number of arguments
-if len(sys.argv) != 2:
+if len(sys.argv) != 3:
     print("Usage: python script.py <cbz_file>")
 else:
     # Process the CBZ file
-    process_cbz_file(sys.argv[1])
+    process_cbz_file(args.cbz_file, args)
