@@ -33,21 +33,13 @@ def reverse_file_order(directory):
             file_count = len(files)
             # Create a temporary file name using a random UUID
             temp = os.path.join(directory, str(uuid.uuid4()))
-            # Get the full path of the current file
             file1 = os.path.join(directory, files[i])
-            # Get the full path of the next file
             file2 = os.path.join(directory, files[file_count - i - 1])
-            print(f"Swapping files {files[i]} and {files[file_count - i - 1]}")
-            # print(f"Swapping files {files[i]}")
             try:
-                # Rename the current file to the temporary file
                 os.rename(file1, temp)
-                # Rename the next file to the current file
                 os.rename(file2, file1)
-                # Rename the temporary file to the next file
                 os.rename(temp, file2)
             except Exception as e:
-                # Print an error message if an exception occurs during the file swapping
                 print(f"Error swapping files {files[i]} and {files[i+1]}: {e}")
 
 # Check if the script is called with the correct number of arguments
