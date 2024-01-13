@@ -34,7 +34,7 @@ def reverse_file_order(directory):
     # Iterate over the list of files in steps of 1
     for i in range(0, len(files), 1):
         # Check if the next file exists
-        if i + 1 <= len(files)/2:
+        if i + 1 <= len(files)+1:
             # Get the total number of files
             file_count = len(files)
             # Create a temporary file name using a random UUID
