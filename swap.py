@@ -13,7 +13,7 @@ def process_cbz_file(cbz_file):
             zip_ref.extractall(temp_dir)
         
         # Reverse the order of files in the temporary directory
-        swap_page_pair(temp_dir)
+        reverse_file_order(temp_dir)
         
         with zipfile.ZipFile(cbz_file, 'w') as zipf:
             for root, dirs, files in os.walk(temp_dir):
@@ -38,6 +38,25 @@ def swap_page_pair(directory):
                 os.rename(temp, file2)
             except Exception as e:
                 print(f"Error swapping files {files[i]} and {files[i+1]}: {e}")
+
+def reverse_file_order(directory):
+    # Create a list of files in the directory
+    files = os.listdir(directory)
+    
+    # Iterate over the list of files in steps of 1
+    for i in range(0, len(files), 1):
+        if i + 1 <= len(files)/2:
+            file_count = len(files)
+            temp = os.path.join(directory, str(uuid.uuid4()))
+            file1 = os.path.join(directory, files[i])
+            file2 = os.path.join(directory, files[file_count - i - 1])
+            try:
+                os.rename(file1, temp)
+                os.rename(file2, file1)
+                os.rename(temp, file2)
+            except Exception as e:
+                print(f"Error swapping files {files[i]} and {files[i+1]}: {e}")
+
 
 # Check if the script is called with the correct number of arguments
 if len(sys.argv) != 2:
